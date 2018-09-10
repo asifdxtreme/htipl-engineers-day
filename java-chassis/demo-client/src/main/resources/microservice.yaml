@@ -1,0 +1,14 @@
+﻿APPLICATION_ID: huaweidemo
+service_description:
+  name: DemoClient
+  version: 0.0.1
+servicecomb:
+  service:
+    registry:
+      address: http://127.0.0.1:30100
+  rest:
+    address: 0.0.0.0:8090
+  handler:
+    chain:
+      Consumer:
+        default: bizkeeper-consumer,loadbalance
