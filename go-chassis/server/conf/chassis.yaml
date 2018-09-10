@@ -1,0 +1,30 @@
+---
+cse:
+  service:
+    registry:
+      type: servicecenter
+      scope: full
+      autodiscovery: false
+      address: http://127.0.0.1:30100
+      refeshInterval : 30s
+      watch: true
+
+  config:
+    client:
+      serverUri: http://127.0.0.1:8080
+      type: apollo
+      refreshMode: 1
+      refreshInterval: 10
+      autodiscovery: false
+      serviceName: apollo-integration
+      env: DEV
+      cluster: apollo
+      namespace: application
+  protocols:
+    rest:
+      listenAddress: 127.0.0.1:8083
+      advertiseAddress: 127.0.0.1:8083
+  handler:
+    chain:
+      Provider:
+        default: bizkeeper-provider, ratelimiter-provider
