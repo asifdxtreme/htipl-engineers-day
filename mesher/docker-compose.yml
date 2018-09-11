@@ -1,0 +1,37 @@
+version:  '3'
+services:
+  ServiceCenter:
+    image: servicecomb/service-center
+    ports:
+      - 30100:30100
+  mesher-consumer:
+    image: gochassis/mesher:1.5rc
+    environment:
+      CSE_REGISTRY_ADDR: http://ServiceCenter:30100
+      SERVICE_NAME: "mesher-consumer"
+    network_mode: "service:php-client"
+    depends_on:
+      - php-client
+  php-server:
+    build: ./server
+    network_mode: "service:mesher-provider"
+    depends_on:
+      - mesher-provider
+  php-client:
+    build: ./client
+    environment:
+      http_proxy: http://127.0.0.1:30101
+    ports:
+      - 8888:80
+    links:
+      - ServiceCenter
+  mesher-provider:
+    image: gochassis/mesher:1.5rc
+    environment:
+      CSE_REGISTRY_ADDR: http://ServiceCenter:30100
+      SERVICE_NAME: "hellomesher"
+    links:
+      - ServiceCenter
+
+
+
