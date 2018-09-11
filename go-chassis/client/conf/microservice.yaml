@@ -1,4 +1,3 @@
----
-APPLICATION_ID: demo
+APPLICATION_ID: EngineeringDay
 service_description:
   name: Client
