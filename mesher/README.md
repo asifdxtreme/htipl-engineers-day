@@ -13,4 +13,6 @@
        OUTPUT:
        10
        ```
-      
+## Diagram
+
+![mesher diagram](mesher.png)      
